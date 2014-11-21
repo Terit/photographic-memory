@@ -47,20 +47,21 @@ $(document).ready(function() {
     if($(this).data('match') !== true) {
       var name = $(this).data('name');
 
-      clickHistory.push(this);
+      clickHistory.push($(this));
       toggle_card($(this));
+        var card1 = clickHistory[clickHistory.length - 2];
+        var card2 = clickHistory[clickHistory.length - 1];
 
       if(flipped_card === name) {
 
-        $(this).data('match', true);
+        card1.data('match', true);
+        card2.data('match', true);
         flipped_card = "none";
 
       } else if(flipped_card === "none") {
         flipped_card = name;
 
       } else {
-        var card1 = clickHistory[clickHistory.length - 2];
-        var card2 = clickHistory[clickHistory.length - 1];
         setTimeout (
           function() {
             toggle_card($(card1));
