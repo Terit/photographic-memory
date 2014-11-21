@@ -29,21 +29,21 @@
 .container {
   width: 800px; }
 
-#cards .row #card-template {
+#cards .row .flip {
   margin: 10px;
   height: 100%;
   width: 25%; }
-  #cards .row #card-template .card {
+  #cards .row .flip .card {
     height: 150px; 
   }
-    #cards .row #card-template .card .back {
+    #cards .row .flip .card .back {
       width: 150px;
       height: 150px;
       border-radius: 15px;
       background-size: 100% 100%;
       background-repeat: no-repeat;
  }
-    #cards .row #card-template .card .front {
+    #cards .row .flip .card .front {
       width: 150px;
       height: 150px;
       border-radius: 15px;
