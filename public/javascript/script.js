@@ -1,10 +1,25 @@
 var names = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad','Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad'];
 // var names = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt']
-
+function toggle_card (card) {
+  if(card.data('match') !== true) {
+      if(card.data('flipped') === false){
+      card.flip(true);
+      card.data('flipped', true);
+    } else {
+      card.flip(false);
+      card.data('flipped', false);
+    }
+  }
+}
 
 $(document).ready(function() {
+  $(".start").on("click", function() {
+    $(".overlay").hide();
+    $(this).hide();
+  });
 
-    var row = $("<div class='row'>");
+  var row = $("<div class='row'>");
+
   $.each(names, function (index, name) {
     var newCard = $('#card-template').clone();
     if ((index + 1) % 4 === 0 || index === 0) {
@@ -14,27 +29,50 @@ $(document).ready(function() {
     $(".row").append(newCard);
     var name_path = "url('images/" + name + ".jpg')";
     newCard.find('.back').css("background-image", name_path);
-    newCard.flip();
+    newCard.flip({
+      trigger: 'manual'
+    });
+    newCard.data('flipped', false);
+    newCard.data('match', false);
+    
+    // newCard.on("click", function() {
+    //   toggle_card(newCard);
+    // });
   });
 
-  $(".start").on("click", function() {
-    $(".overlay").hide();
-    $(this).hide();
-  });
+  var flipped_card = "none";
+  var clickHistory = [flipped_card];
 
-    var active = "";
+  $('.flip').on('click', function() {
+    if($(this).data('match') !== true) {
+      var name = $(this).data('name');
 
-    $('.card').on("click",function() {
-    name = $(this).parent().data("name");
+      clickHistory.push(this);
+      toggle_card($(this));
 
-      if(active === name) {
-        active = "";
-      }else if(active === "") {
-        active = name;
-      } else if(active !== name){
-        active = "";
+      if(flipped_card === name) {
+
+        $(this).data('match', true);
+        flipped_card = "none";
+
+      } else if(flipped_card === "none") {
+        flipped_card = name;
+
+      } else {
+        var card1 = clickHistory[clickHistory.length - 2];
+        var card2 = clickHistory[clickHistory.length - 1];
+        setTimeout (
+          function() {
+            toggle_card($(card1));
+            toggle_card($(card2));
+          }, 2000 );
+        flipped_card = "none";
+
       }
+    }
   });
+
+
 
 });
 
