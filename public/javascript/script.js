@@ -66,7 +66,7 @@ $(document).ready(function() {
           function() {
             toggle_card($(card1));
             toggle_card($(card2));
-          }, 2000 );
+          }, 1000 );
         flipped_card = "none";
 
       }
