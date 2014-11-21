@@ -8,13 +8,10 @@ $(document).ready(function() {
   $.each(names, function (index, name) {
     var newCard = $('#card-template').clone();
     if ((index + 1) % 4 === 0 || index === 0) {
-      // $("#cards").append("</div>")
       $("#cards").append(row);
     };
-
+    newCard.data('name', name);
     $(".row").append(newCard);
-    // $("#cards .row").append(newCard);
-
     var name_path = "url('images/" + name + ".jpg')";
     newCard.find('.back').css("background-image", name_path);
     newCard.flip();
@@ -23,6 +20,20 @@ $(document).ready(function() {
   $(".start").on("click", function() {
     $(".overlay").hide();
     $(this).hide();
+  });
+
+    var active = "";
+
+    $('.card').on("click",function() {
+    name = $(this).parent().data("name");
+
+      if(active === name) {
+        active = "";
+      }else if(active === "") {
+        active = name;
+      } else if(active !== name){
+        active = "";
+      }
   });
 
 });
