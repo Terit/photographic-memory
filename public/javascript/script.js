@@ -1,3 +1,10 @@
+MAX_TIME = 60;
+startTime = 0;
+timer = null;
+
+function gameOver(){
+  window.clearTimeout(timer);
+}
 var names = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad','Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad'];
 // var names = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt']
 function toggle_card (card) {
@@ -74,6 +81,32 @@ $(document).ready(function() {
   });
 
 
+
+  var playButton = document.getElementById('play_button');
+  
+
+  function currentTime(){
+    return Math.round( new Date().getTime() / 1000 );
+  }
+
+  function updateTime(){
+    var elapsedTime = currentTime() - startTime;
+    var remainingTime = MAX_TIME - elapsedTime;
+    console.debug("Remaining time is: ", remainingTime);
+    if (remainingTime === 0){
+      gameOver();
+    }
+
+  }
+  function startTimer() {
+    startTime = currentTime();
+    timer = window.setInterval(updateTime, 1000);
+  }
+
+  $(playButton).on('click', function (event) {
+    startTimer();
+  });
+    
 
 });
 
