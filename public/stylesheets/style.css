@@ -1,9 +1,13 @@
 .panel.panel-primary {
-  position: relative; }
-  .panel.panel-primary button {
+  position: relative; 
+}
+.panel.panel-primary button {
     position: absolute;
-    top: 50%;
-    left: 353px;
+    top: 45%;
+    left: 269px;
+    width: 30%;
+    height: 75px;
+    font-size: 40px;
     z-index: 1; }
 
 .overlay {
@@ -28,6 +32,10 @@
 
 .container {
   width: 800px; }
+
+#cards {
+  margin-left: 20px;
+}
 
 #cards .row .flip {
   margin: 10px;
