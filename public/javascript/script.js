@@ -3,6 +3,24 @@ startTime = 0;
 timer = null;
 pictures = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad','Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad'];
 
+function shuffle(array) {
+  var m = array.length, t, i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+}
+
 function gameOver(){
   window.clearTimeout(timer);
   setTimeout( function() {
@@ -34,7 +52,7 @@ $(document).ready(function() {
 
  // GENERATING CARDS-------------------------------------
 
-  $.each(pictures, function (index, picture) {
+  $.each(shuffle(pictures), function (index, picture) {
     var newCard = $('#card-template').clone();
     newCard.removeAttr("id");
     $('.row').append(newCard);
