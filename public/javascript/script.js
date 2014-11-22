@@ -1,28 +1,28 @@
 MAX_TIME = 60;
 startTime = 0;
 timer = null;
+pictures = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad','Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad'];
 
 function gameOver(){
   window.clearTimeout(timer);
 }
-var pictures = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad','Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad'];
 
 
  // DEALS WITH CARD FLIPPING LIBRARY IN JQUERY.FLIP.JS-------------
 
 function toggle_card (card) {
-      if(card.data('flipped') === false){
-      card.flip(true);
-      card.data('flipped', true);
-    } else {
-      card.flip(false);
-      card.data('flipped', false);
-    }
+  if(card.data('flipped') === false){
+    card.flip(true);
+    card.data('flipped', true);
+  } else {
+    card.flip(false);
+    card.data('flipped', false);
   }
+}
 
-  function isSameCard(card1, card2) {                       
-    return card1.data('name') === card2.data('name');               // function to see if cards have same name/url
-  }
+function isSameCard(card1, card2) {                       
+  return card1.data('name') === card2.data('name');               // function to see if cards have same name/url
+}
 
  // JQUERY LISTENING BEGINS-------------------------------------
 
@@ -32,7 +32,7 @@ $(document).ready(function() {
     $(this).hide();
   });
 
-  var row = $("<div class='row'>");
+  row = $("<div class='row'>");
 
      // GENERATING CARDS-------------------------------------
 
@@ -43,7 +43,6 @@ $(document).ready(function() {
       $("#cards").append(row);
     };
     newCard.data('name', picture);
-    newCard.data('id', index); 
     $(".row").append(newCard);
     var name_path = "url('images/" + picture + ".jpg')";
     newCard.find('.back').css("background-image", name_path);
@@ -51,13 +50,12 @@ $(document).ready(function() {
       trigger: 'manual'
     });
     newCard.data('flipped', false);
-
-    
   });
 
  // FLIPPING CARDS AND MATCHING LOGIC-------------------------------------
 
  var mouseClicks = null;
+ var matches = null;
 
   $('.flip').on('click', function() {                              // calling the div with the flip class once clickedm STATE 1
     var currentCard = $(this);                                    // setting current card to flip div
@@ -77,6 +75,7 @@ $(document).ready(function() {
               $(element).addClass('match');
               $(element).removeClass('phlipped');
               mouseClicks = 0;
+              matches ++;
             });
           } else {                                                     // STATE 3
               setTimeout( function() {
@@ -89,9 +88,10 @@ $(document).ready(function() {
           }
         } 
       }
-    
+    if(matches === 16){
+      gameOver();
     }
-    console.log(mouseClicks);
+    }
 });
 
 
