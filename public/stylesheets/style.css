@@ -1,10 +1,30 @@
 .panel.panel-primary {
-  position: relative; }
-  .panel.panel-primary button {
+  position: relative; 
+}
+.message {
+  top: 30%;
+}
+
+.start {
+  top: 45%;
+}
+.panel.panel-primary button {
     position: absolute;
-    top: 50%;
-    left: 353px;
-    z-index: 1; }
+    left: 269px;
+    width: 30%;
+    height: 75px;
+    font-size: 40px;
+    z-index: 1; 
+  }
+
+.panel.panel-primary p {
+    position: absolute;
+    left: 269px;
+    width: 30%;
+    height: 75px;
+    font-size: 40px;
+    z-index: 1; 
+  }
 
 .overlay {
   background-color: blue;
@@ -29,6 +49,10 @@
 .container {
   width: 800px; }
 
+#cards {
+  margin-left: 20px;
+}
+
 #cards .row .flip {
   margin: 10px;
   height: 100%;
@@ -47,7 +71,7 @@
       width: 150px;
       height: 150px;
       border-radius: 15px;
-      background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5fw8rtlMazZFoRm0TRKxquBdiGNIuWbrk46bLAGPfnFwRe6vudwaDx48");
+      background-image: url("../images/instagram_icon_large.png");
       background-size: 100%; 
     }
 
