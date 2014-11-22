@@ -5,6 +5,11 @@ pictures = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Don
 
 function gameOver(){
   window.clearTimeout(timer);
+  setTimeout( function() {
+    $(".overlay").show();
+    $('#play_button').html("Play Again?");
+    $('#play_button').show();    
+  }, 250);
 }
 
 
@@ -26,30 +31,31 @@ function isSameCard(card1, card2) {
 
  // JQUERY LISTENING BEGINS-------------------------------------
 
-$(document).ready(function() {                  
-  $(".start").on("click", function() {
+$(document).ready(function() { 
+
+  $("#play_button").on("click", function() {
     $(".overlay").hide();
     $(this).hide();
   });
 
-  row = $("<div class='row'>");
+  // row = $("<div class='row'>");   ROW NOW HARD CODED IN TO DOM
 
      // GENERATING CARDS-------------------------------------
 
   $.each(pictures, function (index, picture) {
     var newCard = $('#card-template').clone();
+
     newCard.removeAttr("id");
-    if ((index + 1) % 4 === 0 || index === 0) {
-      $("#cards").append(row);
-    };
+
+    $('.row').append(newCard);
+
     newCard.data('name', picture);
-    $(".row").append(newCard);
+    newCard.data('flipped', false);
     var name_path = "url('images/" + picture + ".jpg')";
     newCard.find('.back').css("background-image", name_path);
     newCard.flip({
       trigger: 'manual'
     });
-    newCard.data('flipped', false);
   });
 
  // FLIPPING CARDS AND MATCHING LOGIC-------------------------------------
