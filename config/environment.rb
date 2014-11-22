@@ -9,6 +9,7 @@ require 'sinatra/activerecord'
 
 require 'pry'
 require 'instagram'
+require 'gon-sinatra'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
@@ -36,3 +37,5 @@ Instagram.configure do |config|
   # For secured endpoints only
   #config.client_ips = '<Comma separated list of IPs>'
 end
+
+Sinatra::register Gon::Sinatra

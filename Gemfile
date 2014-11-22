@@ -12,6 +12,7 @@ gem 'puma'
 gem 'tux'
 
 gem 'instagram'
+gem 'gon-sinatra'
 
 group :development, :test do
   gem 'pry'
