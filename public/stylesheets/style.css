@@ -26,6 +26,15 @@
     z-index: 1; 
   }
 
+  #replay {
+    z-index: 2;
+  }
+
+.disabled {
+  opacity: 1 !important;
+
+}
+
 .overlay {
   background-color: blue;
   position: absolute;
