@@ -8,6 +8,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 
 require 'pry'
+require 'instagram'
 
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
@@ -28,3 +29,10 @@ require APP_ROOT.join('config', 'database')
 
 # Load the routes / actions
 require APP_ROOT.join('app', 'actions')
+
+Instagram.configure do |config|
+  config.client_id = "9da886f5f068407d9239abb2ae46cda2"
+  config.client_secret = "ab530693873a4010bf5f9067ee775f3f"
+  # For secured endpoints only
+  #config.client_ips = '<Comma separated list of IPs>'
+end
