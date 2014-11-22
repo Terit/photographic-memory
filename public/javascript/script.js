@@ -1,4 +1,4 @@
-MAX_TIME = 60;
+MAX_TIME = 2;
 startTime = 0;
 timer = null;
 pictures = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad','Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad'];
@@ -26,7 +26,8 @@ function gameOver(){
   setTimeout( function() {
     $(".overlay").show();
     $('#play_button').html("Play Again?");
-    $('#play_button').show();    
+    $('#play_button').show();
+    $('#play_button').before('<p class="btn btn-success message">You Win!</p>')  
   }, 250);
 }
 

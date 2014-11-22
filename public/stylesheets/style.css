@@ -1,14 +1,30 @@
 .panel.panel-primary {
   position: relative; 
 }
+.message {
+  top: 30%;
+}
+
+.start {
+  top: 45%;
+}
 .panel.panel-primary button {
     position: absolute;
-    top: 45%;
     left: 269px;
     width: 30%;
     height: 75px;
     font-size: 40px;
-    z-index: 1; }
+    z-index: 1; 
+  }
+
+.panel.panel-primary p {
+    position: absolute;
+    left: 269px;
+    width: 30%;
+    height: 75px;
+    font-size: 40px;
+    z-index: 1; 
+  }
 
 .overlay {
   background-color: blue;
