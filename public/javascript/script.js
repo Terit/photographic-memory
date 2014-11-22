@@ -57,48 +57,41 @@ $(document).ready(function() {
 
  // FLIPPING CARDS AND MATCHING LOGIC-------------------------------------
 
-
+ var mouseClicks = null;
 
   $('.flip').on('click', function() {                              // calling the div with the flip class once clickedm STATE 1
-
     var currentCard = $(this);                                    // setting current card to flip div
 
-    if(!$(this).hasClass('match')) {                           //if card does not have class phlipped
+    if(!$(this).hasClass('match') && !$(this).hasClass('phlipped')) {                           //if card does not have class phlipped
+      mouseClicks ++;
 
-    currentCard.addClass("phlipped");                             // then assign to flip  
-
-      toggle_card($(this));                                       // this is what flips the card  STATE 2
-
+      if(mouseClicks <= 2){
+      currentCard.addClass("phlipped");                             // then assign to flip  
       var phlippedCards = $(".phlipped");                         // assigns a variable to an array containing all class phlipped elements  
+        toggle_card($(this));                                       // this is what flips the card  STATE 2
 
-      if(phlippedCards.length === 2){                             // STATE 2.5
-        
-        if(isSameCard($(phlippedCards[0]),$(phlippedCards[1]))){    // if cards match go to STATE 4 
-          console.log('found a match');
-          phlippedCards.each(function (index,element){
-            $(element).addClass('match');
-            $(element).removeClass('phlipped');
-          });
-        } else {                                                     // STATE 3
-            setTimeout( function() {
-              phlippedCards.each(function (index,element){
-              toggle_card($(element))
-              $(element).removeClass("phlipped")
+        if(phlippedCards.length === 2){                             // STATE 2.5
+            
+          if(isSameCard($(phlippedCards[0]),$(phlippedCards[1]))){    // if cards match go to STATE 4 
+            phlippedCards.each(function (index,element){
+              $(element).addClass('match');
+              $(element).removeClass('phlipped');
+              mouseClicks = 0;
             });
-          },1000 );
-        }
+          } else {                                                     // STATE 3
+              setTimeout( function() {
+                phlippedCards.each(function (index,element){
+                  toggle_card($(element))
+                  $(element).removeClass("phlipped")
+                  mouseClicks = 0
+                });
+              }, 1000);
+          }
+        } 
       }
+    
     }
-        // setTimeout (
-        //   function() {
-        //     $(".phlipped").each(function (index,element){
-        //       toggle_card($(element));
-        //       $(element).removeClass("phlipped");
-        //     });
-        //     // toggle_card($(previousCard));
-        //     // toggle_card($(currentCard));
-        //   }, 1000 );
-
+    console.log(mouseClicks);
 });
 
 
