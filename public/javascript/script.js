@@ -1,4 +1,4 @@
-MAX_TIME = 2;
+MAX_TIME = 60;
 startTime = 0;
 timer = null;
 pictures = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad','Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad'];
@@ -21,13 +21,13 @@ function shuffle(array) {
   return array;
 }
 
-function gameOver(){
+function gameOver(message){
   window.clearTimeout(timer);
   setTimeout( function() {
     $(".overlay").show();
     $('#play_button').html("Play Again?");
     $('#play_button').show();
-    $('#play_button').before('<p class="btn btn-success message">You Win!</p>')  
+    $('#play_button').before('<p class="btn btn-success message">' + message + '</p>')  
   }, 250);
 }
 
@@ -100,7 +100,7 @@ $(document).ready(function() {
       }
     }
     if(matches === 16){
-      gameOver();
+      gameOver("You Win!");
     }
 });
 
@@ -110,6 +110,7 @@ $(document).ready(function() {
 
   $(playButton).on('click', function (event) {
     $(".overlay").hide();
+    $('.message').hide();
     $(this).hide();
     startTimer();
   });
@@ -128,7 +129,7 @@ $(document).ready(function() {
     var remainingTime = MAX_TIME - elapsedTime;
     console.debug("Remaining time is: ", remainingTime);
     if (remainingTime === 0){
-      gameOver();
+      gameOver("You Lose");
     }
   }
 
