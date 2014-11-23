@@ -14,15 +14,16 @@
             <a class='a-spacer' id="tag">#<% if @tag %><%= @tag %><% else %>popular<% end %></a>
           </li>
         </ul>
-    </div>
-
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
       <form class="navbar-form navbar-right" method="get" action="/search">
         <input type="text" class="form-control col-lg-8" placeholder="#Hashtag Search" name="search">
       </form>
     </div>
+
+<!--     <div class="navbar-collapse collapse navbar-responsive-collapse">
+    </div> -->
   </div>
   <div id='card-template' style='display: hidden;' class='flip col-xs-3'>
+<div class="container">
     <div class='card'>
       <div class='front-wrap'>
         <div class="front"></div>
@@ -32,7 +33,6 @@
       </div>
     </div>
   </div>
-  <div class="container">
     <div class="panel panel-primary">
       <div class="overlay"></div>
       <div class="panel-body">
