@@ -17,6 +17,30 @@
   font-size: 20px;
 }
 
+.left {
+  width: 45%;
+}
+
+.center {
+  width: 10%;
+}
+
+.right {
+  width: 45%;
+}
+
+.navbar-brand {
+  font-size: 22px;
+}
+
+.right form {
+  padding-right: 30px;
+}
+
+.a-spacer:hover {
+  color: white !important;
+}
+
 .panel.panel-primary button {
     position: absolute;
     left: 269px;
