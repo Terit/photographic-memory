@@ -9,7 +9,10 @@ get "/" do
   end
   gon.links = @links[0..7]
   erb :index
+end
 
+get "/search" do
+  redirect "/#{params[:search]}"
 end
 
 get "/:tag" do
