@@ -1,4 +1,4 @@
-MAX_TIME = 2;
+MAX_TIME = 45;
 startTime = 0;
 timer = null;
 
