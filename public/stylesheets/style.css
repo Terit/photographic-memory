@@ -26,12 +26,21 @@
     z-index: 1; 
   }
 
+  #replay {
+    z-index: 2;
+  }
+
+.disabled {
+  opacity: 1 !important;
+
+}
+
 .overlay {
   background-color: blue;
   position: absolute;
   width: 100%;
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.25;
   z-index: 1; }
 
 .flip .card {

@@ -1,16 +1,9 @@
-
-
-MAX_TIME = 40;
+MAX_TIME = 45;
 startTime = 0;
 timer = null;
-// pictures = ['Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad','Andrew Theriault','Ashley Theiss','Casey Sampson','Dave Hyatt','Donald (DJ) Ballard','Dustin Roe','Harper Price-Brown','Jan De Graad'];
-// pictures = ["http://scontent-b.cdninstagram.com/hphotos-xfa1/t51.2885-15/10818017_311130379091962_415857801_s.jpg", "http://scontent-a.cdninstagram.com/hphotos-xaf1/t51.2885-15/10817535_408333635984142_2048272146_s.jpg", "http://scontent-a.cdninstagram.com/hphotos-xaf1/t51.2885-15/10817961_1492932880968883_149509756_s.jpg", "http://scontent-a.cdninstagram.com/hphotos-xpa1/t51.2885-15/10809821_1545348122378674_1394104790_s.jpg", "http://scontent-a.cdninstagram.com/hphotos-xpf1/t51.2885-15/10802903_930132240347645_1890908708_s.jpg", "http://scontent-a.cdninstagram.com/hphotos-xpa1/t51.2885-15/927400_1554953078075588_847397428_s.jpg", "http://scontent-a.cdninstagram.com/hphotos-xfa1/t51.2885-15/10784824_1398536440437243_854985275_s.jpg", "http://scontent-a.cdninstagram.com/hphotos-xfp1/t51.2885-15/10747917_311499379055533_436774832_s.jpg"]
 
 pictures = gon.links;
 finalPictures = []
-$.map( [1, 2, [3, 4], [5, 6], 7], function(n){
-   return n;
-});
 
 $.map(pictures, function(picture, index) {
   finalPictures.push(picture);
@@ -35,13 +28,22 @@ function shuffle(array) {
   return array;
 }
 
-function gameOver(message){
+function gameOver(message, outcome){
   window.clearTimeout(timer);
   setTimeout( function() {
     $(".overlay").show();
-    $('#play_button').html("Play Again?");
-    $('#play_button').show();
-    $('#play_button').before('<p class="btn btn-success message">' + message + '</p>')  
+    // $('#play_button').html("Play Again?");
+    // $('#play_button').show();
+    $('#play_button').before('<button name="replay_button" type="submit" value="/" id="replay" class="btn btn-info start">Play Again</button>')
+
+    $('#play_button').before('<p class="btn btn-' + outcome + ' disabled message">' + message + '</p>')  
+    $('#play_button').remove();
+
+    //do the click binding here  or other option live event listener
+    $('#replay').on('click', function (event) {
+    location.reload(true);
+    });
+
   }, 250);
 }
 
@@ -115,7 +117,7 @@ $(document).ready(function() {
       }
     }
     if(matches === 16){
-      gameOver("You Win!");
+      gameOver("You Win!", 'success');
     }
 });
 
@@ -129,6 +131,8 @@ $(document).ready(function() {
     $(this).hide();
     startTimer();
   });
+
+  
 
   function startTimer() {
     startTime = currentTime();
@@ -144,7 +148,7 @@ $(document).ready(function() {
     var remainingTime = MAX_TIME - elapsedTime;
     console.debug("Remaining time is: ", remainingTime);
     if (remainingTime === 0){
-      gameOver("You Lose");
+      gameOver("You Lose", 'danger');
     }
   }
 
