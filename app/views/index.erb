@@ -10,10 +10,19 @@
     </ul>
   </div>
   <div class="nav navbar-nav right">
-    <form class="navbar-form navbar-right" method="get" action="/search">
-      <input type="text" class="form-control col-lg-8" placeholder="#Hashtag Search" name="search">
+    <ul class='nav navbar-nav'>
+      <li><a id="timer" class='navbar-right'>Time: 45</a></li>
+    </ul>
+    <form  class="navbar-form navbar-right" method="get" action="/search">
+      
+      <input id='search_bar' type="text" class="form-control col-lg-8" placeholder="#Hashtag Search" name="search">
     </form>
   </div>
+</div>
+<div class="progress">
+  <div class="progress-bar progress-bar-success" style="width: 35%"></div>
+  <div class="progress-bar progress-bar-warning" style="width: 20%"></div>
+  <div class="progress-bar progress-bar-danger" style="width: 10%"></div>
 </div>
 
 <div id='card-template' style='display: hidden;' class='flip col-xs-3'>
@@ -36,7 +45,6 @@
 
     <div id="cards"><div class='row'></div></div>
       
-    <h3 id="timer"></h3>
   </div>
 
 

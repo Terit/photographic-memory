@@ -1,6 +1,19 @@
 .panel.panel-primary {
   position: relative; 
 }
+
+.navbar {
+  margin-bottom: 0px;
+}
+
+.progress {
+  border-radius: 0px;
+  height: 20px;
+}
+
+#timer {
+  color: white;
+}
 .message {
   top: 30%;
 }
@@ -14,6 +27,10 @@
 }
 
 #tag {
+  font-size: 20px;
+}
+
+#timer {
   font-size: 20px;
 }
 
