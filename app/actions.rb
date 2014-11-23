@@ -12,6 +12,15 @@ get "/" do
 end
 
 get "/search" do
+  # binding.pry
+  # search = params[:search]
+  # if search
+  #   search.gsub(/#/,'')
+  #   redirect "/search"
+  # end
+  if params[:search].match(/#/)
+    params[:search] = params[:search].gsub(/#/,'')
+  end
   redirect "/#{params[:search]}"
 end
 
@@ -20,6 +29,7 @@ get "/:tag" do
   @links = []
   tags = client.tag_search("#{params[:tag]}")
   if tags.length > 0
+    @tag = params[:tag]
     for media_item in client.tag_recent_media(tags[0].name)
       @links << media_item.images.thumbnail.url
     end
