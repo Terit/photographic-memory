@@ -8,6 +8,15 @@
 .start {
   top: 45%;
 }
+
+.navbar {
+  border-radius: 0px;
+}
+
+#tag {
+  font-size: 20px;
+}
+
 .panel.panel-primary button {
     position: absolute;
     left: 269px;

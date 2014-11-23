@@ -8,17 +8,10 @@
       <span class="navbar-brand" href="#">Photographic Memory</span>
     </div>
 
-    <div class="nav navbar-nav navbar-left">
+    <div class="nav navbar-nav spacer">
         <ul class="nav navbar-nav">
-          <li><a class="spacer"></a></li>
-          <li>
-            <a>#
-              <% if @tag %>
-                <%= @tag %>
-              <% else %>
-                popular
-              <% end %>
-            </a>
+          <li class='li-spacer'>
+            <a class='a-spacer' id="tag">#<% if @tag %><%= @tag %><% else %>popular<% end %></a>
           </li>
         </ul>
     </div>
