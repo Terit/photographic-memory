@@ -27,6 +27,23 @@
   <title>Photographic Memory</title>
 </head>
 <body>
+<div class="navbar navbar-default">
+  <div class="navbar-header left">
+    <span class="navbar-brand" href="#">Photographic Memory</span>
+  </div>
+  <div class="nav navbar-nav center">
+    <ul class="nav navbar-nav">
+      <li class='li-spacer'>
+        <a class='a-spacer' id="tag">#<% if @tag %><%= @tag %><% else %>popular<% end %></a>
+      </li>
+    </ul>
+  </div>
+  <div class="nav navbar-nav right">
+    <form  class="navbar-form navbar-right" method="get" action="/search">
+      <input id='search_bar' type="text" class="form-control col-lg-8" placeholder="#Hashtag Search" name="search">
+    </form>
+  </div>
+</div>
   <%= yield %>
 </body>
 </html>
