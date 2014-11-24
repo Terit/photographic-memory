@@ -2,17 +2,23 @@
   position: relative; 
 }
 
+.panel-body {
+  padding: 0px;
+}
+
 .navbar {
   margin-bottom: 0px;
 }
 
 .progress {
   border-radius: 0px;
-  height: 20px;
+  height: 30px;
 }
 
 #timer {
+  position: absolute;
   color: white;
+  margin-bottom: 0px;
 }
 .message {
   top: 30%;
@@ -31,6 +37,7 @@
 }
 
 #timer {
+  color: black;
   font-size: 20px;
 }
 
@@ -83,6 +90,10 @@
 .disabled {
   opacity: 1 !important;
 
+}
+
+.container {
+  margin-top: 20px;
 }
 
 .overlay {

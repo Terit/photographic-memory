@@ -31,7 +31,6 @@ function shuffle(array) {
 function gameOver(message, outcome){
   window.clearTimeout(timer);
   setTimeout( function() {
-    $('#search_bar').show();
     $(".overlay").show();
     $('#play_button').before('<button name="replay_button" type="submit" value="/" id="replay" class="btn btn-info start">Play Again</button>')
     $('#play_button').before('<p class="btn btn-' + outcome + ' disabled message">' + message + '</p>')  
@@ -64,7 +63,7 @@ function isSameCard(card1, card2) {
  // JQUERY LISTENING BEGINS-------------------------------------
 
 $(document).ready(function() { 
-  $('#timer').hide();
+  $('.progress').hide();
 
  // GENERATING CARDS-------------------------------------
 
@@ -128,8 +127,7 @@ $(document).ready(function() {
     $(".overlay").hide();
     $('.message').hide();
     $(this).hide();
-    $('#search_bar').hide();
-    $("#timer").show();
+    $('.progress').show();
     startTimer();
   });
 
@@ -148,8 +146,18 @@ $(document).ready(function() {
     var elapsedTime = currentTime() - startTime;
     var remainingTime = MAX_TIME - elapsedTime;
 
-    console.debug("Remaining time is: ", remainingTime);
     $('#timer').html("Time: " + remainingTime);
+    var percentage = (remainingTime / MAX_TIME) * 100;
+    var pageWidth = $('body').css('width');
+    pageWidth = parseInt(pageWidth);
+
+    if(parseInt($('#remaining-bar').css('width')) > (pageWidth * 0.7) ) {
+      $('#remaining-bar').removeClass('progress-bar-warning')
+      $('#remaining-bar').addClass('progress-bar-danger')
+    }
+
+    $('#remaining-bar').css('width', (100 - percentage) + '%');
+    $('.progress-bar-success').css('width', percentage + '%');
 
     if (remainingTime === 0){
       gameOver("You Lose", 'danger');
