@@ -10,6 +10,7 @@ end
 
 get '/leaderboard' do
   @tag = 'leaderboard'
+  @leaders = Leader.all
   erb :leaderboard
 end
 
