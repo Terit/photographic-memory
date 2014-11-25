@@ -34,14 +34,14 @@ function gameOver(message, outcome){
   setTimeout( function() {
     $(".overlay").show();
     $('.buttons').show();
-    $('#score_board').show();
+    $('.score-board').show();
     $('#score_board').prepend('<p class="btn btn-' + outcome + ' disabled message">' + message + '</p>')  
     if(outcome === 'success'){
       $('#time').val("" + (remainingTime * 100));
     } else {
       $('#inputSuccess').hide();
     }
-    $('#score_board').append('<input name="replay_button" type="submit" id="replay" value="Play Again" class="btn btn-info start" />')
+    $('#replay_board').append('<a href="javascript: window.location.reload();" id="replay" class="btn btn-info start">Play Again?</a>')
     $('#play_button').remove();
 
     //do the click binding here  or other option live event listener
@@ -72,7 +72,7 @@ function isSameCard(card1, card2) {
 
 $(document).ready(function() { 
   $('.progress').hide();
-  $('#score_board').hide();
+  $('.score-board').hide();
 
  // GENERATING CARDS-------------------------------------
 
@@ -156,7 +156,6 @@ $(document).ready(function() {
   function updateTime(){
     var elapsedTime = currentTime() - startTime;
     remainingTime = MAX_TIME - elapsedTime;
-    console.log(remainingTime);
     $('#timer').html("Time: " + remainingTime);
     var percentage = Math.round((remainingTime / MAX_TIME) * 100);
     var pageWidth = $('body').css('width');
