@@ -47,3 +47,4 @@ get "/:tag" do
   gon.links = @links[0..7]
   erb :index
 end
+
