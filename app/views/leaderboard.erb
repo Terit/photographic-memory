@@ -6,7 +6,7 @@
         <tr class='danger'>
           <th>Rank</th>
           <th>Name</th>
-          <th>Hastag</th>
+          <th>Hashtag</th>
           <th>Score</th>
         </tr>
           <% if @leaders %>
@@ -14,7 +14,7 @@
             <tr>
               <td>&nbsp;<%= rank + 1 %></td>
               <td><%= leader.name %></td>
-              <td><%= leader.hashtag %></td>
+              <td>#<%= leader.hashtag %></td>
               <td><%= leader.score %></td>
             </tr>
             <% end %>

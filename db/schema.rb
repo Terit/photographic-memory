@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124161257) do
+ActiveRecord::Schema.define(version: 20141125003757) do
 
   create_table "leaders", force: true do |t|
     t.string   "name"
-    t.string   "hashtag"
     t.integer  "score"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "hashtag",    default: "popular"
   end
 
 end

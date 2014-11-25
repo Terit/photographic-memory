@@ -8,9 +8,14 @@ get "/" do
   erb :index
 end
 
+post '/leaderboard' do
+  Leader.create name: params[:name],hashtag: params[:tag],score: params[:score].to_i
+  redirect '/leaderboard'
+end
+
 get '/leaderboard' do
   @tag = 'leaderboard'
-  @leaders = Leader.all
+  @leaders = Leader.all.order(score: :desc).limit(10)
   erb :leaderboard
 end
 
