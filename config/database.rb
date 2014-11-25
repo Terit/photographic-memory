@@ -17,3 +17,19 @@ configure do
   end
 
 end
+
+configure :production do
+
+  ActiveRecord::Base.establish_connection(
+    adapter: 'postgresql',
+    encoding: 'unicode',
+    pool: 5,
+    database: 'd2f13abuoe36ii',
+    username: 'gbdfusthzjnazc',
+    password: 'QHkmZtjLAzwQPzVbiy5d-3Sied',
+    host: 'ec2-107-20-159-155.compute-1.amazonaws.com',
+    port: 5432,
+    min_messages: 'error'
+  )
+
+end
