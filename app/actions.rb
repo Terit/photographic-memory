@@ -9,6 +9,9 @@ get "/" do
 end
 
 post '/leaderboard' do
+  if params[:tag] == ''
+    params[:tag] = 'popular'
+  end
   Leader.create name: params[:name],hashtag: params[:tag],score: params[:score].to_i
   redirect '/leaderboard'
 end
