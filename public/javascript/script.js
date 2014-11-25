@@ -1,5 +1,6 @@
 MAX_TIME = 45;
 startTime = 0;
+remainingTime = null;
 timer = null;
 
 pictures = gon.links;
@@ -32,14 +33,21 @@ function gameOver(message, outcome){
   window.clearTimeout(timer);
   setTimeout( function() {
     $(".overlay").show();
-    $('#play_button').before('<button name="replay_button" type="submit" value="/" id="replay" class="btn btn-info start">Play Again</button>')
-    $('#play_button').before('<p class="btn btn-' + outcome + ' disabled message">' + message + '</p>')  
+    $('.buttons').show();
+    $('#score_board').show();
+    $('#score_board').prepend('<p class="btn btn-' + outcome + ' disabled message">' + message + '</p>')  
+    if(outcome === 'success'){
+      $('#time').val("" + (remainingTime * 100));
+    } else {
+      $('#inputSuccess').hide();
+    }
+    $('#score_board').append('<input name="replay_button" type="submit" id="replay" value="Play Again" class="btn btn-info start" />')
     $('#play_button').remove();
 
     //do the click binding here  or other option live event listener
-    $('#replay').on('click', function (event) {
-    location.reload(true);
-    });
+    // $('#replay').on('click', function (event) {
+    //   location.reload(true);
+    // });
 
   }, 250);
 }
@@ -64,6 +72,7 @@ function isSameCard(card1, card2) {
 
 $(document).ready(function() { 
   $('.progress').hide();
+  $('#score_board').hide();
 
  // GENERATING CARDS-------------------------------------
 
@@ -125,6 +134,7 @@ $(document).ready(function() {
 
   $(playButton).on('click', function (event) {
     $(".overlay").hide();
+    $('.buttons').hide();
     $('.message').hide();
     $(this).hide();
     $('.progress').show();
@@ -134,20 +144,21 @@ $(document).ready(function() {
   
 
   function startTimer() {
-    startTime = currentTime();
-    timer = window.setInterval(updateTime, 1000);
+    startTime = Math.round((currentTime() * 100 ) / 100 );
+    timer = window.setInterval(updateTime, 100);
   }
 
   function currentTime(){
-    return Math.round( new Date().getTime() / 1000 );
+   return new Date().getTime() / 1000;
+    // return Math.round( cTime * 100 / 100)
   }
 
   function updateTime(){
     var elapsedTime = currentTime() - startTime;
-    var remainingTime = MAX_TIME - elapsedTime;
-
+    remainingTime = MAX_TIME - elapsedTime;
+    console.log(remainingTime);
     $('#timer').html("Time: " + remainingTime);
-    var percentage = (remainingTime / MAX_TIME) * 100;
+    var percentage = Math.round((remainingTime / MAX_TIME) * 100);
     var pageWidth = $('body').css('width');
     pageWidth = parseInt(pageWidth);
 
@@ -159,7 +170,7 @@ $(document).ready(function() {
     $('#remaining-bar').css('width', (100 - percentage) + '%');
     $('.progress-bar-success').css('width', percentage + '%');
 
-    if (remainingTime === 0){
+    if (remainingTime <= 0){
       gameOver("You Lose", 'danger');
     }
   }

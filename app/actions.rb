@@ -1,6 +1,3 @@
-# Homepage (Root path)
-
-
 get "/" do
   client = Instagram.client(:access_token => session[:access_token])
   @links = []
@@ -11,13 +8,18 @@ get "/" do
   erb :index
 end
 
+post '/leaderboard' do
+  Leader.create name: params[:name],hashtag: params[:tag],score: params[:score].to_i
+  redirect '/leaderboard'
+end
+
+get '/leaderboard' do
+  @tag = 'leaderboard'
+  @leaders = Leader.all.order(score: :desc).limit(10)
+  erb :leaderboard
+end
+
 get "/search" do
-  # binding.pry
-  # search = params[:search]
-  # if search
-  #   search.gsub(/#/,'')
-  #   redirect "/search"
-  # end
   if params[:search].match(/#/)
     params[:search] = params[:search].gsub(/#/,'')
   end

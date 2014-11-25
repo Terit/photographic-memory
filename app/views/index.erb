@@ -1,26 +1,26 @@
-<div class="navbar navbar-default">
-  <div class="navbar-header left">
-    <span class="navbar-brand" href="#">Photographic Memory</span>
-  </div>
-  <div class="nav navbar-nav center">
-    <ul class="nav navbar-nav">
-      <li class='li-spacer'>
-        <a class='a-spacer' id="tag">#<% if @tag %><%= @tag %><% else %>popular<% end %></a>
-      </li>
-    </ul>
-  </div>
-  <div class="nav navbar-nav right">
-    <form  class="navbar-form navbar-right" method="get" action="/search">
-      <input id='search_bar' type="text" class="form-control col-lg-8" placeholder="#Hashtag Search" name="search">
-    </form>
-  </div>
-</div>
 <div class="progress">
-  <!-- <a id="timer" class='navbar-right'>Time: 45</a> -->
   <div class="progress-bar progress-bar-success" style="width: 100%"></div>
   <div id='remaining-bar' class="progress-bar progress-bar-warning" style="width: 0%"></div>
 </div>
 
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="overlay"></div>
+    <div class="panel-body">
+
+      <div class='buttons'>
+        <button id="play_button" class="btn btn-info start">Play Now</button>
+          <form id='score_board' action='/leaderboard' method='post' id="play_button">
+            <!-- <p id='initials-message' class='btn btn-success message'>Enter your initials</p > -->
+            <input name='name' type='text' class="form-control" maxlength="3" id='inputSuccess' placeholder='Enter initials for high score'></input>
+            <input name='score' type='hidden' id='time' ></input>
+            <input name='tag' type='hidden' value=<%= @tag %> ></input>
+          </form>
+       </div>
+    </div>
+    <div id="cards"><div class='row'></div></div>
+  </div>
+</div>
 <div id='card-template' style='display: hidden;' class='flip col-xs-3'>
   <div class='card'>
     <div class='front-wrap'>
@@ -30,19 +30,4 @@
       <div class="back"></div>
     </div>
   </div>
-</div>
-
-<div class="container">
-  <div class="panel panel-primary">
-    <div class="overlay"></div>
-    <div class="panel-body">
-      <button id="play_button" class="btn btn-info start">Play Now</button>
-    </div>
-
-    <div id="cards"><div class='row'></div></div>
-      
-  </div>
-
-
-
 </div>

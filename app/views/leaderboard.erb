@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="panel panel-primary">
+    <!-- <div class="overlay"></div> -->
+    <div class="panel-body">
+      <table class="table table-striped">
+        <tr class='danger'>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Hashtag</th>
+          <th>Score</th>
+        </tr>
+          <% if @leaders %>
+            <% @leaders.each_with_index do |leader, rank| %>
+            <tr>
+              <td>&nbsp;<%= rank + 1 %></td>
+              <td><%= leader.name %></td>
+              <td>#<%= leader.hashtag %></td>
+              <td><%= leader.score %></td>
+            </tr>
+            <% end %>
+          <% end %>
+      </table>
+    </div>
+</div>
+
