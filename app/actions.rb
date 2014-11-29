@@ -23,13 +23,12 @@ get '/leaderboard' do
 end
 
 get "/search" do
-  if params[:search].match(/#/)
-    params[:search] = params[:search].gsub(/#/,'')
-  end
-  redirect "/#{params[:search]}"
+  redirect "/#{params[:search].gsub!(/#/,'')}"
+  # redirect "/#{params[:search]}"
 end
 
-get "/:tag" do
+get "/search" do
+  params[:search].gsub!(/#/,'')
   client = Instagram.client(:access_token => session[:access_token])
   @links = []
   tags = client.tag_search("#{params[:tag]}")
