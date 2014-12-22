@@ -5,6 +5,10 @@
   transform: rotateY(180deg);
 }
 
+.hidden {
+  display: none;
+}
+
 .front {
   width: 150px;
   height: 150px;

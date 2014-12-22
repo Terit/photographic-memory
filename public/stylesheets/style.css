@@ -1,52 +1,7 @@
 .container {
   margin-top: 20px;
-  /*width: 800px;*/
-}
-/*
-.card {
-  height: 150px;
 }
 
-.flip .card {
-  transform-style: preserve-3d;
-  transition: all 0.5s ease-out; 
-}
-
-.flip .card .front-wrap, .flip .card .back-wrap {
-  position: absolute;
-  backface-visibility: hidden;
-}
-
-.flip .card .front, .flip .card .back {
-  /*width: 100%;*/
-  /*height: 100%; */
-}
-/*
-#cards {
-  margin-left: 20px;
-}
-
-#cards .row .flip {
-  margin: 10px;
-  /*height: 100%;*/
-  /*width: 25%; */
-}
-/*
-#cards .row .flip .card .back {
-  width: 150px;
-  height: 150px;
-  border-radius: 15px;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-#cards .row .flip .card .front {
-  width: 150px;
-  height: 150px;
-  border-radius: 15px;
-  background-image: url("../images/instagram_icon_large.png");
-  background-size: 100%; 
-}
-*/
 th {
   width: 25%;
 }

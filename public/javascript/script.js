@@ -44,17 +44,6 @@ function gameOver(message, outcome){
   $('#play_button').remove();
 }
 
- // DEALS WITH CARD FLIPPING LIBRARY IN JQUERY.FLIP.JS-------------
-
-function toggle_card (card) {
-  if(card.data('flipped') === false){
-    card.flip(true);
-    card.data('flipped', true);
-  } else {
-    card.flip(false);
-    card.data('flipped', false);
-  }
-}
 
 function isSameCard(card1, card2) {                       
   return card1.data('name') === card2.data('name');               // function to see if cards have same name/url
@@ -81,6 +70,7 @@ $(function() {
 
   $.each(shuffle(finalPictures), function (index, picture) {
     var newCard = $('#card-template').clone();
+    newCard.removeClass('hidden');
     newCard.removeAttr("id");
     if((index + 1) % 4 === 1) {
       $('<div class="row">').appendTo('#cards');
@@ -106,7 +96,6 @@ $(function() {
       if(mouseClicks <= 2){
         currentCard.addClass("phlipped");                             // then assign to flip  
         var phlippedCards = $(".phlipped");                         // assigns a variable to an array containing all class phlipped elements  
-        toggle_card($(this));                                       // this is what flips the card  STATE 2
         if(phlippedCards.length === 2){                             // STATE 2.5
           if(isSameCard($(phlippedCards[0]),$(phlippedCards[1]))){    // if cards match go to STATE 4 
             phlippedCards.each(function (index,element){
@@ -118,7 +107,6 @@ $(function() {
           } else {                                                     // STATE 3
             setTimeout( function() {
               phlippedCards.each(function (index,element){
-                toggle_card($(element))
                 $(element).removeClass("phlipped")
                 mouseClicks = 0
               });
