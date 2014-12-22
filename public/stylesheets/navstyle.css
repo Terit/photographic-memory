@@ -1,0 +1,63 @@
+.navbar {
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
+.progress {
+  border-radius: 0px;
+  height: 30px;
+}
+
+#tag {
+  font-size: 20px;
+}
+
+#tag.a-spacer:hover {
+  color: white;
+}
+
+.left {
+  width: 45%;
+}
+
+.center {
+  width: 10%;
+}
+
+.right {
+  width: 45%;
+}
+
+.navbar-brand {
+  font-size: 22px;
+}
+
+.right form {
+  padding-right: 30px;
+}
+
+#css-remaining-bar {
+  width: 0%;
+}
+
+#css-remaining-bar {
+  width: 100%;
+}
+
+#css-remaining-bar {
+  width: 0%;
+  transition: width 45s linear;
+}
+
+#css-remaining-bar.transition2 {
+  width: 100%;
+}
+
+#css-progress-bar {
+  width: 100%;
+  transition: width 45s linear;
+}
+
+#css-progress-bar.transition {
+  width: 0%;
+}

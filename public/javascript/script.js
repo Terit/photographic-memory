@@ -31,25 +31,17 @@ function shuffle(array) {
 
 function gameOver(message, outcome){
   window.clearTimeout(timer);
-  setTimeout( function() {
-    $(".overlay").show();
-    $('.buttons').show();
-    $('#score_board').show();
-    $('#score_board').prepend('<p class="btn btn-' + outcome + ' disabled message">' + message + '</p>')  
-    if(outcome === 'success'){
-      $('#time').val("" + (remainingTime * 100));
-    } else {
-      $('#inputSuccess').hide();
-    }
-    $('#score_board').append('<input name="replay_button" type="submit" id="replay" value="Play Again" class="btn btn-info start" />')
-    $('#play_button').remove();
-
-    //do the click binding here  or other option live event listener
-    // $('#replay').on('click', function (event) {
-    //   location.reload(true);
-    // });
-
-  }, 250);
+  $(".overlay").show();
+  $('.buttons').show();
+  $('#scoreboard').removeClass('hidden');
+  $('#scoreboard').prepend('<p class="btn btn-' + outcome + ' disabled message">' + message + '</p>')  
+  if(outcome === 'success'){
+    $('#time').val("" + (remainingTime * 100));
+  } else {
+    $('#inputSuccess').hide();
+  }
+  $('#scoreboard').append('<input name="replay_button" type="submit" id="replay" value="Play Again" class="btn btn-info start" />')
+  $('#play_button').remove();
 }
 
  // DEALS WITH CARD FLIPPING LIBRARY IN JQUERY.FLIP.JS-------------
@@ -70,24 +62,36 @@ function isSameCard(card1, card2) {
 
  // JQUERY LISTENING BEGINS-------------------------------------
 
-$(document).ready(function() { 
-  $('.progress').hide();
-  $('#score_board').hide();
+$(function() { 
+
+  $('#play_button').on('click', function (event) {
+    $(".overlay").hide();
+    $('.buttons').hide();
+    $('.message').hide();
+    $(this).hide();
+    $('.progress').removeClass('hidden');
+    setTimeout(function() {
+      $('#css-progress-bar').addClass('transition');
+      $('#css-remaining-bar').addClass('transition2'); 
+    }, 100);
+    startTimer();
+  });
 
  // GENERATING CARDS-------------------------------------
 
   $.each(shuffle(finalPictures), function (index, picture) {
     var newCard = $('#card-template').clone();
     newCard.removeAttr("id");
-    $('.row').append(newCard);
+    if((index + 1) % 4 === 1) {
+      $('<div class="row">').appendTo('#cards');
+    }
+    newCard.appendTo($('.row').last());
     newCard.data('name', picture);
-    newCard.data('flipped', false);
-    // var name_path = "url('images/" + picture + ".jpg')";
-    // newCard.find('.back').css("background-image", name_path);
+    // newCard.data('flipped', false);
     newCard.find('.back').css('background-image', 'url(' + picture + ')');
-    newCard.flip({
-      trigger: 'manual'
-    });
+    // newCard.flip({
+    //   trigger: 'manual'
+    // });
   });
 
  // FLIPPING CARDS AND MATCHING LOGIC-------------------------------------
@@ -95,7 +99,7 @@ $(document).ready(function() {
  var mouseClicks = null;
  var matches = null;
 
-  $('.flip').on('click', function() {                              // calling the div with the flip class once clickedm STATE 1
+  $('.flip-container').on('click', function() {                              // calling the div with the flip class once clickedm STATE 1
     var currentCard = $(this);                                    // setting current card to flip div
     if(!$(this).hasClass('match') && !$(this).hasClass('phlipped')) {                           //if card does not have class phlipped
       mouseClicks ++;
@@ -124,56 +128,50 @@ $(document).ready(function() {
       }
     }
     if(matches === 16){
-      gameOver("You Win!", 'success');
+      stopProgressbar();
+      setTimeout(gameOver("You Win!", 'success'), 250);
     }
-});
-
-  //TIMER FUNCTIONALITY---------------------------------------------
-
-  var playButton = document.getElementById('play_button');
-
-  $(playButton).on('click', function (event) {
-    $(".overlay").hide();
-    $('.buttons').hide();
-    $('.message').hide();
-    $(this).hide();
-    $('.progress').show();
-    startTimer();
   });
 
-  
+  //TIMER FUNCTIONALITY---------------------------------------------
 
   function startTimer() {
     startTime = Math.round((currentTime() * 100 ) / 100 );
     timer = window.setInterval(updateTime, 100);
   }
 
-  function currentTime(){
-   return new Date().getTime() / 1000;
-    // return Math.round( cTime * 100 / 100)
+  function currentTime() {
+    return new Date().getTime() / 1000;
   }
 
   function updateTime(){
     var elapsedTime = currentTime() - startTime;
-    remainingTime = MAX_TIME - elapsedTime;
-    console.log(remainingTime);
-    $('#timer').html("Time: " + remainingTime);
-    var percentage = Math.round((remainingTime / MAX_TIME) * 100);
-    var pageWidth = $('body').css('width');
-    pageWidth = parseInt(pageWidth);
-
-    if(parseInt($('#remaining-bar').css('width')) > (pageWidth * 0.7) ) {
-      $('#remaining-bar').removeClass('progress-bar-warning')
-      $('#remaining-bar').addClass('progress-bar-danger')
-    }
-
-    $('#remaining-bar').css('width', (100 - percentage) + '%');
-    $('.progress-bar-success').css('width', percentage + '%');
-
+    var remainingTime = MAX_TIME - elapsedTime;
+    updateTimer();
     if (remainingTime <= 0){
-      gameOver("You Lose", 'danger');
+      setTimeout(gameOver("You Lose", 'danger'), 250);
     }
   }
 
+  function updateTimer() {
+    var pageWidth = $('body').css('width');
+    pageWidth = parseInt(pageWidth) * 0.7;
+    var remainingBar = $('#css-remaining-bar');
+    if(parseInt(remainingBar.css('width')) > pageWidth ) {
+      remainingBar.removeClass('progress-bar-warning')
+      remainingBar.addClass('progress-bar-danger')
+    }
+  }
+
+  function stopProgressbar() {
+    var progressBar = $('#css-progress-bar')
+    var remainingBar = $('#css-remaining-bar');
+    var pageWidth = parseInt($('body').css('width'));
+    var width = ((pageWidth - parseInt(progressBar.css('width'))) / pageWidth ) * 100;
+    progressBar.css('width', progressBar.css('width'));
+    remainingBar.css('width', width + '%');
+    progressBar.css('transition', 'none');
+    remainingBar.css('transition', 'none');
+  }
 });
 
