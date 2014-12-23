@@ -1,13 +1,13 @@
+ /*Flipped Card */
 .phlipped .flipper {
   transform: rotateY(180deg);
 }
+
+/* Matched card */
 .match .flipper {
   transform: rotateY(180deg);
 }
 
-.hidden {
-  display: none;
-}
 
 /* entire container, keeps perspective */
 .flip-container {
