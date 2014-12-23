@@ -36,24 +36,21 @@
   padding-right: 30px;
 }
 
-#css-remaining-bar {
-  width: 0%;
+.progress > * {
+  height: 100%;
 }
 
 #css-remaining-bar {
+  background-color: #f39c12;
+  position: absolute;
+  top: 0px;
   width: 100%;
-}
-
-#css-remaining-bar {
-  width: 0%;
-  transition: width 45s linear;
-}
-
-#css-remaining-bar.transition2 {
-  width: 100%;
+  height: 30px;
+  z-index: -1;
 }
 
 #css-progress-bar {
+  background-color: #18bc9c;
   width: 100%;
   transition: width 45s linear;
 }

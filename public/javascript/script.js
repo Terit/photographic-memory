@@ -51,7 +51,22 @@ function isSameCard(card1, card2) {
 
  // JQUERY LISTENING BEGINS-------------------------------------
 
+function setCardDimension() {
+  var height = window.innerHeight;
+  var width = window.innerWidth;
+  if (height <= width) {
+    var cardDimension = ((height - 80) / 4);
+  } else {
+    var cardDimension = ((width - 50) / 4);
+  }
+
+  $('#card-template').css('height', cardDimension + 'px');
+  $('#card-template').css('width', cardDimension + 'px');
+}
+
 $(function() { 
+
+  setCardDimension();
 
   $('#play_button').on('click', function (event) {
     $(".overlay").hide();
@@ -61,7 +76,6 @@ $(function() {
     $('.progress').removeClass('hidden');
     setTimeout(function() {
       $('#css-progress-bar').addClass('transition');
-      $('#css-remaining-bar').addClass('transition2'); 
     }, 100);
     startTimer();
   });
@@ -135,7 +149,9 @@ $(function() {
   function updateTime(){
     var elapsedTime = currentTime() - startTime;
     var remainingTime = MAX_TIME - elapsedTime;
-    updateTimer();
+    if(remainingTime < 15 ) {
+      $('#css-remaining-bar').css('background-color', '#e74c3c')
+    }
     if (remainingTime <= 0){
       setTimeout(gameOver("You Lose", 'danger'), 250);
     }
@@ -145,21 +161,17 @@ $(function() {
     var pageWidth = $('body').css('width');
     pageWidth = parseInt(pageWidth) * 0.7;
     var remainingBar = $('#css-remaining-bar');
-    if(parseInt(remainingBar.css('width')) > pageWidth ) {
-      remainingBar.removeClass('progress-bar-warning')
-      remainingBar.addClass('progress-bar-danger')
+    if(parseInt($('#progressBar').css('width')) < pageWidth ) {
+      remainingBar.css('background-color', '#e74c3c')
     }
   }
 
   function stopProgressbar() {
     var progressBar = $('#css-progress-bar')
-    var remainingBar = $('#css-remaining-bar');
     var pageWidth = parseInt($('body').css('width'));
     var width = ((pageWidth - parseInt(progressBar.css('width'))) / pageWidth ) * 100;
     progressBar.css('width', progressBar.css('width'));
-    remainingBar.css('width', width + '%');
     progressBar.css('transition', 'none');
-    remainingBar.css('transition', 'none');
   }
 });
 

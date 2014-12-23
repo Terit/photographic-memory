@@ -1,10 +1,10 @@
-<div class="progress hidden">
-  <div id='css-progress-bar' class="progress-bar progress-bar-success"></div>
-  <div id='css-remaining-bar' class="progress-bar progress-bar-warning"></div>
+<div class="progress">
+  <div id='css-progress-bar' class="timer-green"></div>
+  <div id='css-remaining-bar' class="timer-warning"></div>
 </div>
-
-<div class="container">
-<!--   <div class="panel panel-primary">
+<!-- <div class="container"> -->
+<div id="cards" class='container'>
+  <div class="panel panel-primary">
     <div class="overlay"></div>
     <div class="panel-body">
       <div class='buttons'>
@@ -15,22 +15,10 @@
           <input name='tag' type='hidden' value=<%= @tag %> ></input>
         </form>
        </div>
-    </div> -->
-    <div id="cards"></div>
-  <!-- </div> -->
-<!-- </div> -->
-<!-- <div id='card-template' style='display: hidden;' class='flip col-xs-3'>
-  <div class='card'>
-    <div class='front-wrap'>
-      <div class="front"></div>
     </div>
-    <div class='back-wrap'>
-      <div class="back"></div>
-    </div>
-  </div> -->
-</div>
+  </div>
 
-<div id='card-template' class='three columns flip-container hidden'>
+<div id='card-template' class='flip-container hidden'>
   <div class='flipper'>
     <div class='front'></div>
     <div class='back'></div>
