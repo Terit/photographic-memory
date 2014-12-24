@@ -31,17 +31,18 @@ function shuffle(array) {
 
 function gameOver(message, outcome){
   window.clearTimeout(timer);
-  $(".overlay").show();
-  $('.buttons').show();
-  $('#scoreboard').removeClass('hidden');
-  $('#scoreboard').prepend('<p class="btn btn-' + outcome + ' disabled message">' + message + '</p>')  
+  $('#overlay').show();
+  $('.buttons-panel').show();
+  var scoreboard = $('#scoreboard');
+  scoreboard.removeClass('hidden');
+  scoreboard.prepend('<p class="message ' + outcome + '">' + message + '</p>')  
   if(outcome === 'success'){
     $('#time').val("" + (remainingTime * 100));
   } else {
     $('#inputSuccess').hide();
   }
-  $('#scoreboard').append('<input name="replay_button" type="submit" id="replay" value="Play Again" class="btn btn-info start" />')
-  $('#play_button').remove();
+  $('.buttons-panel').append('<button name="replay_button" type="submit" id="replay" value="Play Again" class="play" />')
+  $('#play-button').remove();
 }
 
 
@@ -68,10 +69,15 @@ $(function() {
 
   setCardDimension();
 
-  $('#play_button').on('click', function (event) {
-    $(".overlay").hide();
-    $('.buttons').hide();
-    $('.message').hide();
+  var overlay = $("#overlay");
+  var buttonsPanel = $('.buttons-panel');
+  var message = $('.message');
+  var playButton = $('#play-button');
+
+  playButton.on('click', function (event) {
+    overlay.hide();
+    buttonsPanel.hide();
+    message.hide();
     $(this).hide();
     $('.progress').removeClass('hidden');
     setTimeout(function() {
