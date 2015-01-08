@@ -1,8 +1,48 @@
-.navbar {
-  margin-bottom: 0px;
-  border-radius: 0px;
+nav {
+  height: 50px;
+  background-color: #217dbb;
+  color: white;
+}
+nav ul {
+  height: 50px;
+  width: 96%;
+  margin: 0 2% 0 2%;
 }
 
+nav li {
+  display: inline-block;
+  height: 50px;
+  top: 0px;
+  vertical-align: middle;
+  margin-top: 0.3em;
+}
+
+nav li:nth-child(odd) {
+  width: 39%;
+}
+
+nav li:nth-child(even) {
+  width: 20%;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav li form {
+  height: 50px;
+  width: 100%;
+}
+nav li form input {
+  width: 75%;
+  float: right;
+  margin: 0px;
+  color: black;
+  font-size: 16px;
+}
+.brand {
+  font-size: 24px;
+}
 .progress {
   border-radius: 0px;
   height: 30px;
@@ -14,26 +54,6 @@
 
 #tag.a-spacer:hover {
   color: white;
-}
-
-.left {
-  width: 45%;
-}
-
-.center {
-  width: 10%;
-}
-
-.right {
-  width: 45%;
-}
-
-.navbar-brand {
-  font-size: 22px;
-}
-
-.right form {
-  padding-right: 30px;
 }
 
 .progress > * {

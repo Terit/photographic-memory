@@ -31,8 +31,7 @@ function shuffle(array) {
 
 function gameOver(message, outcome){
   window.clearTimeout(timer);
-  $('#overlay').show();
-  $('.buttons-panel').show();
+  $('.panel').show();
   var scoreboard = $('#scoreboard');
   scoreboard.removeClass('hidden');
   scoreboard.prepend('<p class="message ' + outcome + '">' + message + '</p>')  
@@ -41,7 +40,7 @@ function gameOver(message, outcome){
   } else {
     $('#inputSuccess').hide();
   }
-  $('.buttons-panel').append('<button name="replay_button" type="submit" id="replay" value="Play Again" class="play" />')
+  $('.buttons-panel').append('<a href="#" id="replay"class="play">Play Again</a>')
   $('#play-button').remove();
 }
 
@@ -69,16 +68,8 @@ $(function() {
 
   setCardDimension();
 
-  var overlay = $("#overlay");
-  var buttonsPanel = $('.buttons-panel');
-  var message = $('.message');
-  var playButton = $('#play-button');
-
-  playButton.on('click', function (event) {
-    overlay.hide();
-    buttonsPanel.hide();
-    message.hide();
-    $(this).hide();
+  $('#play-button').on('click', function (event) {
+    $('.panel').hide();
     $('.progress').removeClass('hidden');
     setTimeout(function() {
       $('#css-progress-bar').addClass('transition');

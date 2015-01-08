@@ -1,3 +1,5 @@
+get "/" do erb :index  end
+
 get "/" do
   client = Instagram.client(:access_token => session[:access_token])
   @links = []
