@@ -1,33 +1,24 @@
-<div class="progress">
-  <div class="progress-bar progress-bar-success" style="width: 100%"></div>
-  <div id='remaining-bar' class="progress-bar progress-bar-warning" style="width: 0%"></div>
+<div class="progress hidden">
+  <div id='css-progress-bar' class="timer-green"></div>
+  <div id='css-remaining-bar' class="timer-warning"></div>
 </div>
 
-<div class="container">
-  <div class="panel panel-primary">
-    <div class="overlay"></div>
-    <div class="panel-body">
-
-      <div class='buttons'>
-        <button id="play_button" class="btn btn-info start">Play Now</button>
-          <form id='score_board' action='/leaderboard' method='post'>
-            <!-- <p id='initials-message' class='btn btn-success message'>Enter your initials</p > -->
-            <input name='name' type='text' class="form-control" maxlength="3" id='inputSuccess' placeholder='Enter initials for high score'></input>
-            <input name='score' type='hidden' id='time' ></input>
-            <input name='tag' type='hidden' value=<%= @tag %> ></input>
-          </form>
+<div id="cards" class='container'>
+  <div class="panel">
+    <div id="overlay"></div>
+      <div class='buttons-panel'>
+        <button id="play-button" class='play'>Play Now</button>
+        <form id='scoreboard' class='hidden' action='/leaderboard' method='post'>
+          <input name='name' type='text' class="form-control" maxlength="3" id='inputSuccess' placeholder='Enter initials for high score'></input>
+          <input name='score' type='hidden' id='time' ></input>
+          <input name='tag' type='hidden' value=<%= @tag %> ></input>
+        </form>
        </div>
-    </div>
-    <div id="cards"><div class='row'></div></div>
   </div>
-</div>
-<div id='card-template' style='display: hidden;' class='flip col-xs-3'>
-  <div class='card'>
-    <div class='front-wrap'>
-      <div class="front"></div>
-    </div>
-    <div class='back-wrap'>
-      <div class="back"></div>
-    </div>
+
+<div id='card-template' class='flip-container hidden'>
+  <div class='flipper'>
+    <div class='front'></div>
+    <div class='back'></div>
   </div>
 </div>

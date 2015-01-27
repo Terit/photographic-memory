@@ -31,38 +31,19 @@ function shuffle(array) {
 
 function gameOver(message, outcome){
   window.clearTimeout(timer);
-  setTimeout( function() {
-    $(".overlay").show();
-    $('.buttons').show();
-    $('#score_board').show();
-    $('#score_board').prepend('<p class="btn btn-' + outcome + ' disabled message">' + message + '</p>')  
-    if(outcome === 'success'){
-      $('#time').val("" + (remainingTime * 100));
-    } else {
-      $('#inputSuccess').hide();
-    }
-    $('#score_board').append('<a href="javascript: window.location.reload();" id="replay" class="btn btn-info start">Play Again?</a>')
-    $('#play_button').remove();
-
-    //do the click binding here  or other option live event listener
-    // $('#replay').on('click', function (event) {
-    //   location.reload(true);
-    // });
-
-  }, 250);
-}
-
- // DEALS WITH CARD FLIPPING LIBRARY IN JQUERY.FLIP.JS-------------
-
-function toggle_card (card) {
-  if(card.data('flipped') === false){
-    card.flip(true);
-    card.data('flipped', true);
+  $('.panel').show();
+  var scoreboard = $('#scoreboard');
+  scoreboard.removeClass('hidden');
+  scoreboard.prepend('<p class="message ' + outcome + '">' + message + '</p>')  
+  if(outcome === 'success'){
+    $('#time').val("" + (remainingTime * 100));
   } else {
-    card.flip(false);
-    card.data('flipped', false);
+    $('#inputSuccess').hide();
   }
+  $('.buttons-panel').append('<a href="javascript: window.location.reload();" id="replay"class="play">Play Again</a>')
+  $('#play-button').remove();
 }
+
 
 function isSameCard(card1, card2) {                       
   return card1.data('name') === card2.data('name');               // function to see if cards have same name/url
@@ -70,24 +51,48 @@ function isSameCard(card1, card2) {
 
  // JQUERY LISTENING BEGINS-------------------------------------
 
-$(document).ready(function() { 
-  $('.progress').hide();
-  $('#score_board').hide();
+function setCardDimension() {
+  var height = window.innerHeight;
+  var width = window.innerWidth;
+  if (height <= width) {
+    var cardDimension = ((height - 80) / 4);
+  } else {
+    var cardDimension = ((width - 50) / 4);
+  }
+
+  $('#card-template').css('height', cardDimension + 'px');
+  $('#card-template').css('width', cardDimension + 'px');
+}
+
+$(function() { 
+
+  setCardDimension();
+
+  $('#play-button').on('click', function (event) {
+    $('.panel').hide();
+    $('.progress').removeClass('hidden');
+    setTimeout(function() {
+      $('#css-progress-bar').addClass('transition');
+    }, 100);
+    startTimer();
+  });
 
  // GENERATING CARDS-------------------------------------
 
   $.each(shuffle(finalPictures), function (index, picture) {
     var newCard = $('#card-template').clone();
+    newCard.removeClass('hidden');
     newCard.removeAttr("id");
-    $('.row').append(newCard);
+    if((index + 1) % 4 === 1) {
+      $('<div class="row">').appendTo('#cards');
+    }
+    newCard.appendTo($('.row').last());
     newCard.data('name', picture);
-    newCard.data('flipped', false);
-    // var name_path = "url('images/" + picture + ".jpg')";
-    // newCard.find('.back').css("background-image", name_path);
+    // newCard.data('flipped', false);
     newCard.find('.back').css('background-image', 'url(' + picture + ')');
-    newCard.flip({
-      trigger: 'manual'
-    });
+    // newCard.flip({
+    //   trigger: 'manual'
+    // });
   });
 
  // FLIPPING CARDS AND MATCHING LOGIC-------------------------------------
@@ -95,14 +100,13 @@ $(document).ready(function() {
  var mouseClicks = null;
  var matches = null;
 
-  $('.flip').on('click', function() {                              // calling the div with the flip class once clickedm STATE 1
+  $('.flip-container').on('click', function() {                              // calling the div with the flip class once clickedm STATE 1
     var currentCard = $(this);                                    // setting current card to flip div
     if(!$(this).hasClass('match') && !$(this).hasClass('phlipped')) {                           //if card does not have class phlipped
       mouseClicks ++;
       if(mouseClicks <= 2){
         currentCard.addClass("phlipped");                             // then assign to flip  
         var phlippedCards = $(".phlipped");                         // assigns a variable to an array containing all class phlipped elements  
-        toggle_card($(this));                                       // this is what flips the card  STATE 2
         if(phlippedCards.length === 2){                             // STATE 2.5
           if(isSameCard($(phlippedCards[0]),$(phlippedCards[1]))){    // if cards match go to STATE 4 
             phlippedCards.each(function (index,element){
@@ -114,7 +118,6 @@ $(document).ready(function() {
           } else {                                                     // STATE 3
             setTimeout( function() {
               phlippedCards.each(function (index,element){
-                toggle_card($(element))
                 $(element).removeClass("phlipped")
                 mouseClicks = 0
               });
@@ -124,55 +127,48 @@ $(document).ready(function() {
       }
     }
     if(matches === 16){
-      gameOver("You Win!", 'success');
+      stopProgressbar();
+      setTimeout(gameOver("You Win!", 'success'), 250);
     }
-});
-
-  //TIMER FUNCTIONALITY---------------------------------------------
-
-  var playButton = document.getElementById('play_button');
-
-  $(playButton).on('click', function (event) {
-    $(".overlay").hide();
-    $('.buttons').hide();
-    $('.message').hide();
-    $(this).hide();
-    $('.progress').show();
-    startTimer();
   });
 
-  
+  //TIMER FUNCTIONALITY---------------------------------------------
 
   function startTimer() {
     startTime = Math.round((currentTime() * 100 ) / 100 );
     timer = window.setInterval(updateTime, 100);
   }
 
-  function currentTime(){
-   return new Date().getTime() / 1000;
-    // return Math.round( cTime * 100 / 100)
+  function currentTime() {
+    return new Date().getTime() / 1000;
   }
 
   function updateTime(){
     var elapsedTime = currentTime() - startTime;
-    remainingTime = MAX_TIME - elapsedTime;
-    $('#timer').html("Time: " + remainingTime);
-    var percentage = Math.round((remainingTime / MAX_TIME) * 100);
-    var pageWidth = $('body').css('width');
-    pageWidth = parseInt(pageWidth);
-
-    if(parseInt($('#remaining-bar').css('width')) > (pageWidth * 0.7) ) {
-      $('#remaining-bar').removeClass('progress-bar-warning')
-      $('#remaining-bar').addClass('progress-bar-danger')
+    var remainingTime = MAX_TIME - elapsedTime;
+    if(remainingTime < 15 ) {
+      $('#css-remaining-bar').css('background-color', '#e74c3c')
     }
-
-    $('#remaining-bar').css('width', (100 - percentage) + '%');
-    $('.progress-bar-success').css('width', percentage + '%');
-
     if (remainingTime <= 0){
-      gameOver("You Lose", 'danger');
+      setTimeout(gameOver("You Lose", 'danger'), 250);
     }
   }
 
+  function updateTimer() {
+    var pageWidth = $('body').css('width');
+    pageWidth = parseInt(pageWidth) * 0.7;
+    var remainingBar = $('#css-remaining-bar');
+    if(parseInt($('#progressBar').css('width')) < pageWidth ) {
+      remainingBar.css('background-color', '#e74c3c')
+    }
+  }
+
+  function stopProgressbar() {
+    var progressBar = $('#css-progress-bar')
+    var pageWidth = parseInt($('body').css('width'));
+    var width = ((pageWidth - parseInt(progressBar.css('width'))) / pageWidth ) * 100;
+    progressBar.css('width', progressBar.css('width'));
+    progressBar.css('transition', 'none');
+  }
 });
 

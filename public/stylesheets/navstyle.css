@@ -1,0 +1,81 @@
+nav {
+  height: 50px;
+  background-color: #217dbb;
+  color: white;
+}
+nav ul {
+  height: 50px;
+  width: 96%;
+  margin: 0 2% 0 2%;
+}
+
+nav li {
+  display: inline-block;
+  height: 50px;
+  top: 0px;
+  vertical-align: middle;
+  margin-top: 0.3em;
+}
+
+nav li:nth-child(odd) {
+  width: 39%;
+}
+
+nav li:nth-child(even) {
+  width: 20%;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav li form {
+  height: 50px;
+  width: 100%;
+}
+nav li form input {
+  width: 75%;
+  float: right;
+  margin: 0px;
+  color: black;
+  font-size: 16px;
+}
+.brand {
+  font-size: 24px;
+}
+.progress {
+  border-radius: 0px;
+  height: 30px;
+  position: relative;
+}
+
+#tag {
+  font-size: 20px;
+}
+
+#tag.a-spacer:hover {
+  color: white;
+}
+
+.progress > * {
+  height: 100%;
+}
+
+#css-remaining-bar {
+  background-color: #f39c12;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 30px;
+  z-index: -1;
+}
+
+#css-progress-bar {
+  background-color: #18bc9c;
+  width: 100%;
+  transition: width 45s linear;
+}
+
+#css-progress-bar.transition {
+  width: 0%;
+}

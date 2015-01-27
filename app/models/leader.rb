@@ -1,4 +1,5 @@
 class Leader < ActiveRecord::Base
+
   validates :name, presence: true, length: { maximum: 3 }
   validates :score, presence: true
 
@@ -11,4 +12,5 @@ class Leader < ActiveRecord::Base
       end
       self.save
     end
+
 end

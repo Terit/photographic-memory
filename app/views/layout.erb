@@ -1,38 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.0/flatly/bootstrap.min.css" >
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/skeleton.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/navstyle.css">
+  <link rel="stylesheet" href="/stylesheets/panelstyle.css">
+  <link rel="stylesheet" href="/stylesheets/application.css">
+
   <link rel="shortcut icon" href="images/instagram_favicon.ico">
 
   <%= include_gon %>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   <script src="/javascript/script.js"></script>
-  <script src="/javascript/jquery.flip.js"></script>
 
   <title>Photographic Memory</title>
 </head>
+<nav>
+  <ul>
+    <li>
+      <a class="brand" href="/">Photographic Memory</a>
+    </li>
+    <li>
+      <a class='a-spacer' id="tag">#<% if @tag %><%= @tag %><% else %>popular<% end %></a>
+    </li>
+    <li>
+      <form  class="navbar-form navbar-right" method="get" action="/search">
+        <input id='search_bar' type="text" placeholder="#Hashtag Search" name="search">
+      </form>
+    </li>
+  </ul>
+</nav>
+
 <body>
-  <div class="navbar navbar-default">
+<!--   <div class="navbar navbar-default">
     <div class="navbar-header left">
-      <a class="navbar-brand" href="/">Photographic Memory</a>
     </div>
     <div class="nav navbar-nav center">
       <ul class="nav navbar-nav">
         <li class='li-spacer'>
-          <a class='a-spacer' id="tag">#<% if @tag %><%= @tag %><% else %>popular<% end %></a>
         </li>
       </ul>
     </div>
     <div class="nav navbar-nav right">
-      <form  class="navbar-form navbar-right" method="get" action="/search">
-        <input id='search_bar' type="text" class="form-control col-lg-8" placeholder="#Hashtag Search" name="search">
-      </form>
     </div>
-  </div>
+  </div> -->
   <%= yield %>
 </body>
 </html>

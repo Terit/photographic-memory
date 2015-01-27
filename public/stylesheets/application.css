@@ -1,0 +1,60 @@
+ /*Flipped Card */
+.phlipped .flipper {
+  webkit-transform: webkit-rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+/* Matched card */
+.match .flipper {
+  webkit-transform: webkit-rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+
+/* entire container, keeps perspective */
+.flip-container {
+  margin: 0 auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.front, .back {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background-size: 100%; 
+  background-repeat: no-repeat;
+  /* hide back of pane during swap */
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.front {
+  background-image: url("../images/instagram_icon_large.png");
+  background-size: 108%; 
+  background-position: -7px -7px;
+  /* front pane, placed above back */
+  z-index: 2;
+  /* for firefox 31 */
+  webkit-transform: webkit-rotateY(0deg);
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  webkit-transform: webkit-rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.flipper {
+  width: 100%;
+  height: 100%;
+/* flip speed goes here */
+  transition: 0.6s;
+  webkit-transform-style: webkit-preserve-3d;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
