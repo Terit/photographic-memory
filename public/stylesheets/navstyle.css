@@ -46,6 +46,7 @@ nav li form input {
 .progress {
   border-radius: 0px;
   height: 30px;
+  position: relative;
 }
 
 #tag {
