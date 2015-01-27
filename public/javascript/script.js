@@ -88,11 +88,7 @@ $(function() {
     }
     newCard.appendTo($('.row').last());
     newCard.data('name', picture);
-    // newCard.data('flipped', false);
     newCard.find('.back').css('background-image', 'url(' + picture + ')');
-    // newCard.flip({
-    //   trigger: 'manual'
-    // });
   });
 
  // FLIPPING CARDS AND MATCHING LOGIC-------------------------------------
