@@ -2,7 +2,12 @@ require 'rake'
 require "sinatra/activerecord/rake"
 require ::File.expand_path('../config/environment', __FILE__)
 
-task :default => :db:reset
+task :default => :nothing
+
+desc "a task that does nothing"
+task "nothing" do
+  # See nothing
+end
 
 Rake::Task["db:create"].clear
 Rake::Task["db:drop"].clear
