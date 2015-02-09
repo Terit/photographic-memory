@@ -9,12 +9,12 @@ gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
 
 gem 'puma'
-gem 'tux'
 
 gem 'instagram'
 gem 'gon-sinatra'
 
 group :development, :test do
+  gem 'tux'
   gem 'pry'
   gem 'shotgun'
   gem 'sqlite3'
