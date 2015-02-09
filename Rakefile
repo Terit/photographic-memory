@@ -1,10 +1,8 @@
 require 'rake'
-require 'rspec/core/rake_task'
-task :default => :spec
-RSpec::Core::RakeTask.new
-
 require "sinatra/activerecord/rake"
 require ::File.expand_path('../config/environment', __FILE__)
+
+task :default => :db:reset
 
 Rake::Task["db:create"].clear
 Rake::Task["db:drop"].clear
