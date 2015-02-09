@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Terit/photographic-memory.svg)](https://travis-ci.org/Terit/photographic-memory)
+
 Photographic Memory
 ==================
 
