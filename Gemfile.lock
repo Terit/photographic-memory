@@ -23,7 +23,7 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     gon-sinatra (0.1.1)
       sinatra
-    hashie (3.3.1)
+    hashie (4.0.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     instagram (1.1.3)
