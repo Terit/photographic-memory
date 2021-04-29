@@ -40,7 +40,7 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
-    puma (3.12.2)
+    puma (3.12.6)
     rack (1.6.12)
     rack-protection (1.5.5)
       rack
